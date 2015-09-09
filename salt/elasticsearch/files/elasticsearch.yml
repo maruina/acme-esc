@@ -1,13 +1,20 @@
 network :
     host : {{ salt['grains.get']('ip_interfaces:eth1:0') }}
+	publish_host: 255.255.255.255
 node:
   name: ${HOSTNAME}
 cluster:
   name: acme-esc-cluster
 cloud:
     aws:
-        region: us-east-1
+        region: us-east
+    node:
+    	auto-attribute: true
+plugin:
+	mandatory: cloud-aws
 discovery:
   type: ec2
   ec2:
-    groups: esc-instances-sg
+    groups: esc-instances
+
+discovery.zen.ping.multicast.enabled: false

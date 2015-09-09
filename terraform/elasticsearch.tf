@@ -53,7 +53,7 @@ resource "aws_security_group" "esc_instances" {
         from_port = 9200
         to_port = 9200
         protocol = "tcp"
-        cidr_blocks = ["${var.private_subnet_cidr}"]
+        cidr_blocks = ["${var.vpc_cidr}"]
     }
     ingress {
         from_port = 22
@@ -65,7 +65,7 @@ resource "aws_security_group" "esc_instances" {
         from_port = -1
         to_port = -1
         protocol = "icmp"
-        cidr_blocks = ["${var.private_subnet_cidr}"]
+        cidr_blocks = ["${var.vpc_cidr}"]
     }
     egress {
         from_port = 80
@@ -78,6 +78,12 @@ resource "aws_security_group" "esc_instances" {
         to_port = 443
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = -9200
+        to_port = 9200
+        protocol = "tcp"
+        cidr_blocks = ["${var.vpc_cidr}"]        
     }
 
     vpc_id = "${aws_vpc.vpc.id}"
