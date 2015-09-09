@@ -87,7 +87,7 @@ resource "aws_security_group" "nat" {
 
 # Create NAT instance
 resource "aws_instance" "nat" {
-    ami = "ami-303b1458"
+    ami = "ami-809f4ae8"
     availability_zone = "us-east-1a"
     instance_type = "m1.small"
     key_name = "${var.key_name}"

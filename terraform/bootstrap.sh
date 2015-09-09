@@ -6,8 +6,8 @@ sudo apt-get update
 sudo apt-get install -y wget git
 
 # Install salt
-cd /opt
-wget -O install_salt.sh https://bootstrap.saltstack.com
+cd /tmp
+wget -O install_salt.sh http://bootstrap.saltstack.com
 sudo sh install_salt.sh -P
 sudo service salt-minion stop
 
