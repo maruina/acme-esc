@@ -102,17 +102,22 @@ resource "aws_security_group" "esc_elb" {
 
 # Create the Elasticsearch instances
 resource "aws_instance" "esc" {
-  count = 3
-  ami = "${lookup(var.debian_amis, var.region)}"
-  instance_type = "t2.small"
-  subnet_id = "${aws_subnet.us-east-1a-private.id}"
-  security_groups = ["${aws_security_group.esc_instances.id}"]
-  key_name = "${var.key_name}"
-  source_dest_check = false
-  iam_instance_profile = "${esc_profile}"
-  tags = { 
-    Name = "acme-esc-node-${count.index}"
-  }  
+    count = 3
+    ami = "${lookup(var.debian_amis, var.region)}"
+    instance_type = "t2.small"
+    subnet_id = "${aws_subnet.us-east-1a-private.id}"
+    security_groups = ["${aws_security_group.esc_instances.id}"]
+    key_name = "${var.key_name}"
+    source_dest_check = false
+    iam_instance_profile = "${esc_profile}"
+  
+    tags = {
+        Name = "acme-esc-node-${count.index}"
+    }
+
+    provisioner "remote-exec" {
+        script = "bootstrap.sh"
+    }
 }
 
 
