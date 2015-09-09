@@ -1,0 +1,13 @@
+network :
+    host : {{ salt['grains.get']('ip_interfaces:eth1:0') }}
+node:
+  name: ${HOSTNAME}
+cluster:
+  name: acme-esc-cluster
+cloud:
+    aws:
+        region: us-east-1
+discovery:
+  type: ec2
+  ec2:
+    groups: esc-instances-sg
