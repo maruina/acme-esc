@@ -19,5 +19,5 @@ Ensure Elasticsearch is installed:
 
 Ensure Elasticsearch Discover-EC2 plugin is installed:
   cmd.run:
-    - name: /usr/share/elasticsearch/bin/plugin --install discovery-ec2
+    - name: /usr/share/elasticsearch/bin/plugin install elasticsearch/elasticsearch-cloud-aws/2.7.1
     - unless: test -d /usr/share/elasticsearch/plugins/cloud-aws

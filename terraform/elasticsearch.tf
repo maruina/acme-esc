@@ -135,7 +135,7 @@ resource "aws_instance" "esc" {
         connection {
             user = "admin"
             key_file = "${var.key_path}"
-            bastion_host = "${aws_instance.nat.public_ip}"
+            bastion_host = "${aws_eip.nat.public_ip}"
             bastion_user = "ec2-user"
             bastion_key_file = "${var.key_path}"
         }
